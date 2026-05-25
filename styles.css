@@ -544,9 +544,13 @@ button {
   padding: clamp(4rem, 8vw, 8rem);
 }
 
-.journey-world:nth-child(even) {
-  background: var(--grey-100);
-}
+.journey-world[data-world="1"] { background: var(--white); }
+.journey-world[data-world="2"] { background: var(--warm-cream); }
+.journey-world[data-world="3"] { background: linear-gradient(135deg, var(--white), var(--warm-cream)); }
+.journey-world[data-world="4"] { background: var(--grey-100); }
+.journey-world[data-world="5"] { background: linear-gradient(to right, var(--grey-100), var(--warm-sand)); }
+.journey-world[data-world="6"] { background: var(--warm-sand); }
+.journey-world[data-world="7"] { background: linear-gradient(135deg, var(--warm-sand), var(--warm-cream)); }
 
 .world-text-content {
   position: relative;

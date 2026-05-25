@@ -218,22 +218,49 @@ Animations.hangerSection = function() {
     }, 3.25 + i * 0.15);
   });
 
-  // Phase 3: Statistics
+  // Phase 3: Statistics (now runs concurrently with hangers)
   if (stats) {
-    gsap.set(stats, { opacity: 0, y: 50 });
-    tl.to(stats, { opacity: 1, y: 0, duration: 0.6, ease: 'luxuryEase' }, 3.5);
+    const statItems = stats.querySelectorAll('.stat-item');
+    gsap.set(stats, { opacity: 1 });
+    
+    statItems.forEach((item, i) => {
+      const numEl = item.querySelector('.stat-number');
+      const label = item.querySelector('.stat-label');
+      const suffix = item.querySelector('.stat-suffix');
+      
+      // Dramatic slow fade up for the whole item
+      gsap.set(item, { opacity: 0, y: 40, filter: 'blur(10px)' });
+      tl.to(item, {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 1.5,
+        ease: 'power3.out',
+      }, 0.5 + (i * 0.2));
 
-    // Count up numbers
-    statNums.forEach((el) => {
-      const target = parseInt(el.dataset.target) || 0;
-      tl.to({ val: 0 }, {
-        val: target,
-        duration: 1.0,
-        ease: 'power2.out',
-        onUpdate: function() {
-          el.textContent = Math.round(this.targets()[0].val);
-        }
-      }, 3.7);
+      // Separate slow fade for label to give that "dhire dhire text show ho" effect
+      if (label) {
+        gsap.set(label, { opacity: 0 });
+        tl.to(label, { opacity: 0.6, duration: 1.5, ease: 'none' }, 1.0 + (i * 0.2));
+      }
+      
+      if (suffix) {
+        gsap.set(suffix, { opacity: 0 });
+        tl.to(suffix, { opacity: 1, duration: 1 }, 1.2 + (i * 0.2));
+      }
+
+      // Count up numbers
+      if (numEl) {
+        const target = parseInt(numEl.dataset.target) || 0;
+        tl.to({ val: 0 }, {
+          val: target,
+          duration: 2.0, // slower count
+          ease: 'power2.out',
+          onUpdate: function() {
+            numEl.textContent = Math.round(this.targets()[0].val);
+          }
+        }, 0.8 + (i * 0.2));
+      }
     });
   }
 
