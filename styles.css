@@ -1,0 +1,1305 @@
+/* ============================================
+   ATELIER — Luxury Fashion Design Studio
+   Premium Editorial CSS
+   ============================================ */
+
+/* ---------- Custom Properties ---------- */
+:root {
+  --white: #FFFFFF;
+  --black: #000000;
+  --grey-100: #FAFAFA;
+  --grey-200: #F2F2F2;
+  --grey-300: #EBEBEB;
+  --grey-400: #D4D4D4;
+  --grey-500: #A8A8A8;
+  --silver-gradient: linear-gradient(135deg, #C0C0C0, #E8E8E8, #A8A8A8);
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ---------- Global Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--black);
+  background: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--black);
+  color: var(--white);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: none;
+  border: none;
+  background: none;
+}
+
+/* ---------- 1. LOADER ---------- */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-inner {
+  text-align: center;
+}
+
+.loader-inner svg {
+  display: inline-block;
+}
+
+.loader-letter {
+  will-change: transform, opacity;
+}
+
+#loader-percentage {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.5em;
+  margin-top: 3rem;
+  opacity: 0;
+}
+
+#loader-progress {
+  width: 200px;
+  height: 1px;
+  background: var(--grey-300);
+  margin: 2rem auto;
+  overflow: hidden;
+}
+
+#loader-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--black);
+  transition: none;
+}
+
+#loader-tagline {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  opacity: 0;
+  margin-top: 2rem;
+}
+
+/* ---------- 2. CUSTOM CURSOR ---------- */
+#custom-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--black);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease-luxury),
+              height 0.3s var(--ease-luxury);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease-luxury),
+              height 0.3s var(--ease-luxury),
+              border-color 0.3s var(--ease-luxury);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Cursor hover state */
+.cursor-hover .cursor-ring {
+  width: 60px;
+  height: 60px;
+  border-color: var(--black);
+}
+
+.cursor-hover .cursor-dot {
+  width: 8px;
+  height: 8px;
+}
+
+/* ---------- 3. SCROLL PROGRESS ---------- */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--silver-gradient);
+  z-index: 9997;
+  transition: none;
+}
+
+/* ---------- 4. HERO ---------- */
+#hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-shape {
+  position: absolute;
+  background: var(--grey-200);
+  filter: blur(80px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 1200px;
+  padding: 0 2rem;
+}
+
+.hero-headline {
+  margin-bottom: 3rem;
+}
+
+.hero-word {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7.5vw, 7rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  will-change: clip-path, transform;
+}
+
+/* Hero featured image */
+.hero-image-wrapper {
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45%;
+  max-width: 600px;
+  height: 80%;
+  overflow: hidden;
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.1);
+}
+
+.hero-subtext {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  font-weight: 300;
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--black);
+  color: var(--white);
+  padding: 1.2rem 3.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--black);
+  padding: 1.2rem 3.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s var(--ease-luxury);
+}
+
+.btn-secondary:hover {
+  border-color: var(--black);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* ---------- 5. HANGER SECTION ---------- */
+#hanger-section {
+  min-height: 100vh;
+  position: relative;
+  background: var(--white);
+}
+
+.hanger-scene {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+
+.hanger-scene-title {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  opacity: 0.4;
+}
+
+.hangers-row {
+  display: flex;
+  gap: clamp(1rem, 4vw, 4rem);
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hanger-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  will-change: transform;
+}
+
+.hanger-hook svg {
+  width: clamp(80px, 10vw, 120px);
+}
+
+.hanger-garment {
+  transform-origin: top center;
+  will-change: transform;
+  opacity: 0;
+}
+
+.hanger-garment svg {
+  width: clamp(60px, 8vw, 100px);
+}
+
+.hanger-stats {
+  display: flex;
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-top: 5rem;
+  opacity: 0;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+  display: inline;
+}
+
+.stat-suffix {
+  font-family: var(--font-display);
+  font-size: 0.6em;
+  font-weight: 300;
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  opacity: 0.5;
+}
+
+/* ---------- 6. HORIZONTAL JOURNEY ---------- */
+#horizontal-journey {
+  overflow: hidden;
+  position: relative;
+}
+
+.journey-track {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.journey-world {
+  flex: 0 0 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: clamp(4rem, 8vw, 8rem);
+}
+
+.journey-world:nth-child(even) {
+  background: var(--grey-100);
+}
+
+.world-text-content {
+  position: relative;
+  z-index: 2;
+  max-width: 450px;
+}
+
+.world-number {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 300;
+  opacity: 0.06;
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  line-height: 1;
+}
+
+.world-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.world-description {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  max-width: 400px;
+  line-height: 1.8;
+  opacity: 0.6;
+}
+
+.world-visual {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40%;
+  max-width: 400px;
+}
+
+/* Fabric swatches */
+.fabric-swatch {
+  width: 80px;
+  height: 80px;
+  border: 1px solid var(--grey-300);
+  position: absolute;
+  transition: transform 0.6s var(--ease-luxury);
+}
+
+.fabric-swatch:nth-child(1) {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(0, 0, 0, 0.02) 5px,
+    rgba(0, 0, 0, 0.02) 6px
+  );
+}
+
+.fabric-swatch:nth-child(2) {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.fabric-swatch:nth-child(3) {
+  background:
+    linear-gradient(135deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%) -5px 0,
+    linear-gradient(225deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%) -5px 0,
+    linear-gradient(315deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%),
+    linear-gradient(45deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%);
+  background-size: 10px 10px;
+}
+
+.fabric-swatch:nth-child(4) {
+  background: var(--grey-200);
+}
+
+.fabric-swatch:hover {
+  transform: scale(1.1) rotate(2deg);
+}
+
+/* Journey World 6 - Runway Visual */
+.runway-visual-scene {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.spotlight-grad {
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent 80%);
+  transform: translateX(-50%);
+}
+
+.runway-line {
+  position: absolute;
+  bottom: 30%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.runway-silhouette {
+  position: absolute;
+}
+
+/* World stats in World 7 */
+.world-stat {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.world-stat .stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.world-stat .stat-suffix {
+  font-family: var(--font-display);
+  font-size: 0.5em;
+  font-weight: 300;
+}
+
+.world-stat .stat-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  opacity: 0.5;
+}
+
+/* Stitch line animation */
+.stitch-line {
+  animation: shimmer 3s linear infinite;
+}
+
+/* Sketch lines */
+.sketch-line {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.sketch-line:nth-child(2) { animation-delay: -1.5s; }
+.sketch-line:nth-child(3) { animation-delay: -3s; }
+.sketch-line:nth-child(4) { animation-delay: -4.5s; }
+
+/* ---------- 7. CINEMATIC RUNWAY ---------- */
+#cinematic-runway {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  perspective: 1200px;
+  background: var(--black);
+}
+
+.runway-environment {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.runway-fog {
+  position: absolute;
+  inset: 0;
+}
+
+.runway-fog > div {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+}
+
+.runway-fog > div:nth-child(1) {
+  animation: fogDrift 20s linear infinite;
+}
+
+.runway-fog > div:nth-child(2) {
+  animation: fogDrift 28s linear infinite reverse;
+  opacity: 0.7;
+}
+
+.runway-fog > div:nth-child(3) {
+  animation: fogDrift 35s linear infinite;
+  opacity: 0.4;
+}
+
+.runway-spotlights {
+  position: absolute;
+  inset: 0;
+}
+
+.runway-spotlights > div {
+  position: absolute;
+  top: -50%;
+  width: 2px;
+  height: 200%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent 70%);
+  transform-origin: top center;
+}
+
+.runway-floor {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotateX(65deg);
+  width: 300%;
+  height: 80%;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent);
+  transform-origin: bottom center;
+}
+
+.runway-center-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent 60%);
+  transform: translateX(-50%);
+}
+
+.runway-figure {
+  position: absolute;
+  bottom: 20%;
+  opacity: 0.6;
+}
+
+.runway-overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 8rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ---------- 8. PINNED VIDEO ---------- */
+#pinned-video {
+  position: relative;
+  background: var(--grey-100);
+}
+
+.video-wrapper {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-abstract {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #F8F8F8, #EBEBEB, #F2F2F2, #FAFAFA);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.video-texture-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.video-controls {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 5;
+}
+
+.video-play-btn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s var(--ease-luxury);
+}
+
+.video-play-btn:hover {
+  border-color: var(--black);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.video-play-btn svg {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.video-info-panel {
+  position: absolute;
+  top: 50%;
+  right: -100%;
+  transform: translateY(-50%);
+  width: 380px;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  opacity: 0;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.panel-text {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  opacity: 0.7;
+}
+
+/* ---------- 9. TESTIMONIAL WORLDS (shared) ---------- */
+[id$="-world"] {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem;
+}
+
+.world-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+}
+
+.world-product {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.world-product svg {
+  width: clamp(150px, 30vw, 300px);
+  height: auto;
+  will-change: transform;
+}
+
+/* Real product images */
+.world-product-image {
+  width: clamp(200px, 40vw, 420px);
+  height: clamp(250px, 50vw, 520px);
+  overflow: hidden;
+  position: relative;
+}
+
+.world-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.world-product-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.04);
+  pointer-events: none;
+}
+
+/* Image label overlay */
+.product-label {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  color: var(--white);
+  mix-blend-mode: difference;
+}
+
+canvas.world-particles-canvas,
+canvas.cafe-steam-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.world-testimonial {
+  text-align: center;
+  max-width: 550px;
+  opacity: 0;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 3rem;
+  border-radius: 2px;
+}
+
+.world-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.9;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.world-quote::before {
+  content: '\201C';
+  font-size: 4rem;
+  font-family: var(--font-display);
+  position: absolute;
+  top: -1rem;
+  left: -0.5rem;
+  opacity: 0.1;
+  font-style: normal;
+}
+
+.world-client-name {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.world-client-role {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 300;
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+}
+
+/* Section-specific */
+#cafe-world {
+  background: linear-gradient(to bottom, var(--white), #FAF8F5);
+}
+
+/* Steam paths animation */
+.cafe-steam-path {
+  animation: steamRise 4s ease-in-out infinite;
+}
+
+.cafe-steam-path:nth-child(2) {
+  animation-delay: -1.3s;
+  animation-duration: 5s;
+}
+
+.cafe-steam-path:nth-child(3) {
+  animation-delay: -2.8s;
+  animation-duration: 4.5s;
+}
+
+/* Coffee beans */
+.cafe-bean {
+  animation: float 6s ease-in-out infinite;
+}
+
+.cafe-bean:nth-child(odd) {
+  animation-delay: -2s;
+}
+
+/* ---------- 10. SNEAKER SPECIFIC ---------- */
+.sneaker-layer {
+  will-change: transform;
+  transition: transform 0.6s var(--ease-luxury);
+}
+
+.sneaker-labels {
+  position: absolute;
+  right: -120px;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sneaker-labels span {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.4s var(--ease-luxury);
+}
+
+/* ---------- Designer World ---------- */
+.designer-swatch {
+  width: 60px;
+  height: 60px;
+  border: 1px solid var(--grey-300);
+  background: var(--grey-200);
+  transition: transform 0.4s var(--ease-luxury);
+}
+
+.designer-swatch:nth-child(1) {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--grey-200),
+    var(--grey-200) 3px,
+    rgba(0,0,0,0.02) 3px,
+    rgba(0,0,0,0.02) 4px
+  );
+}
+
+.designer-swatch:nth-child(2) {
+  background: radial-gradient(circle, rgba(0,0,0,0.04) 1px, var(--grey-200) 1px);
+  background-size: 6px 6px;
+}
+
+.designer-swatch:nth-child(3) {
+  background: var(--grey-300);
+}
+
+.designer-moodboard {
+  width: 200px;
+  height: 150px;
+  background: var(--grey-200);
+  border: 1px solid var(--grey-300);
+  position: absolute;
+}
+
+.designer-moodboard:nth-child(2) {
+  transform: rotate(-2deg);
+}
+
+/* Perfume mist */
+.perfume-mist {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ---------- 11. FOOTER ---------- */
+#footer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 8rem 2rem;
+}
+
+.footer-content {
+  text-align: center;
+  max-width: 900px;
+}
+
+.footer-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 2rem;
+}
+
+.footer-subtext {
+  font-size: 0.95rem;
+  opacity: 0.5;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.footer-cta {
+  background: var(--black);
+  color: var(--white);
+  padding: 1.2rem 3.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: all 0.4s var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-cta:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.footer-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--silver-gradient);
+  margin: 4rem auto;
+  border: none;
+}
+
+.footer-contact {
+  margin-bottom: 2rem;
+}
+
+.footer-email,
+.footer-phone {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.3s var(--ease-luxury);
+}
+
+.footer-email:hover {
+  opacity: 1;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.footer-social-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease-luxury);
+  color: var(--black);
+}
+
+.footer-social-icon:hover {
+  border-color: var(--black);
+  transform: translateY(-3px);
+}
+
+.footer-social-icon svg {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.footer-logo-final {
+  margin: 0 auto 2rem;
+  opacity: 0.3;
+}
+
+.footer-logo-final svg {
+  width: 120px;
+  margin: 0 auto;
+}
+
+.footer-copyright {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  opacity: 0.3;
+}
+
+.footer-fade {
+  position: fixed;
+  inset: 0;
+  background: var(--white);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9990;
+}
+
+/* ---------- #main-content ---------- */
+#main-content {
+  opacity: 0;
+}
+
+/* ---------- KEYFRAME ANIMATIONS ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+@keyframes fogDrift {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(50%); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes gentleRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.03); }
+  50% { box-shadow: 0 0 40px rgba(0, 0, 0, 0.06); }
+}
+
+@keyframes steamRise {
+  0% { transform: translateY(0) scaleX(1); opacity: 0.3; }
+  100% { transform: translateY(-60px) scaleX(1.5); opacity: 0; }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .hero-word {
+    font-size: 3rem;
+  }
+
+  .hangers-row {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hanger-stats {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .journey-world {
+    padding: 4rem 2rem;
+  }
+
+  .world-visual {
+    display: none;
+  }
+
+  #custom-cursor {
+    display: none;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 1rem 2.5rem;
+  }
+
+  .footer-headline {
+    font-size: clamp(2rem, 6vw, 4rem);
+  }
+
+  #footer {
+    padding: 4rem 1.5rem;
+  }
+
+  .video-info-panel {
+    width: 280px;
+    padding: 2rem;
+  }
+
+  .runway-overlay-text {
+    font-size: clamp(2rem, 6vw, 4rem);
+    letter-spacing: 0.1em;
+  }
+
+  .sneaker-labels {
+    display: none;
+  }
+
+  .designer-sketch,
+  .designer-swatch,
+  .designer-moodboard {
+    display: none;
+  }
+
+  .world-product svg {
+    width: clamp(120px, 50vw, 250px);
+  }
+
+  .hanger-scene {
+    height: auto;
+    min-height: 100vh;
+    padding: 6rem 1rem;
+  }
+
+  .stat-number {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-word {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtext {
+    font-size: 0.85rem;
+  }
+
+  .hero-image-wrapper {
+    display: none;
+  }
+
+  .hanger-hook svg {
+    width: 60px;
+  }
+
+  .hanger-garment svg {
+    width: 50px;
+  }
+
+  .footer-headline {
+    font-size: 2rem;
+  }
+
+  .world-quote {
+    font-size: 1rem;
+  }
+
+  .panel-title {
+    font-size: 1.4rem;
+  }
+
+  .world-product-image {
+    width: 250px;
+    height: 300px;
+  }
+}
