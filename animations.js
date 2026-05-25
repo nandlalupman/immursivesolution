@@ -159,7 +159,7 @@ Animations.hangerSection = function() {
       pin: true,
       scrub: 1,
       start: 'top top',
-      end: '+=4000',
+      end: '+=5000',
       anticipatePin: 1,
     }
   });
@@ -568,6 +568,18 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
         ease: 'sine.inOut',
       }, 2.5);
 
+      // Gentle floating
+      watchTl.to(product, {
+        y: -15,
+        duration: 0.5,
+        ease: 'sine.inOut',
+      }, 2.0);
+      watchTl.to(product, {
+        y: 0,
+        duration: 0.5,
+        ease: 'sine.inOut',
+      }, 2.5);
+
       // Testimonial
       if (testimonial) {
         gsap.set(testimonial, { opacity: 0, y: 40 });
@@ -769,6 +781,23 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
         { y: 0, opacity: 1, scale: 1, duration: 1, ease: 'luxuryEase' },
         0
       );
+
+      // Slight rotation reveal
+      sneakerTl.to(product, {
+        rotationY: -5,
+        duration: 0.5,
+        ease: 'sine.inOut',
+      }, 0.8);
+      sneakerTl.to(product, {
+        rotationY: 5,
+        duration: 1,
+        ease: 'sine.inOut',
+      }, 1.3);
+      sneakerTl.to(product, {
+        rotationY: 0,
+        duration: 0.7,
+        ease: 'sine.out',
+      }, 2.3);
 
       // Slow dramatic zoom
       if (img) {
