@@ -580,6 +580,17 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
         ease: 'sine.inOut',
       }, 2.5);
 
+      // Info Chips
+      const infoReveal = product.querySelector('.world-info-reveal');
+      const infoChips = product.querySelectorAll('.info-chip');
+      if (infoReveal && infoChips.length) {
+        gsap.set(infoReveal, { opacity: 1, y: 0 }); 
+        infoChips.forEach((chip, i) => {
+          gsap.set(chip, { opacity: 0, y: 20 });
+          watchTl.to(chip, { opacity: 1, y: 0, duration: 0.5, ease: 'luxuryEase' }, 1.0 + i * 0.2);
+        });
+      }
+
       // Testimonial
       if (testimonial) {
         gsap.set(testimonial, { opacity: 0, y: 40 });
@@ -812,6 +823,17 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
           duration: 1,
           ease: 'power2.inOut',
         }, 2.5);
+      }
+
+      // Info Chips
+      const infoReveal = product.querySelector('.world-info-reveal');
+      const infoChips = product.querySelectorAll('.info-chip');
+      if (infoReveal && infoChips.length) {
+        gsap.set(infoReveal, { opacity: 1, y: 0 });
+        infoChips.forEach((chip, i) => {
+          gsap.set(chip, { opacity: 0, y: 20 });
+          sneakerTl.to(chip, { opacity: 1, y: 0, duration: 0.5, ease: 'luxuryEase' }, 1.5 + i * 0.2);
+        });
       }
 
       // Testimonial
