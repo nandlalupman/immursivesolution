@@ -227,7 +227,8 @@ button {
 
 .nav-link {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
@@ -901,9 +902,8 @@ button {
 .video-wrapper {
   position: relative;
   width: 100%;
-  height: 80vh;
-  min-height: 600px;
-  max-height: 900px;
+  height: 100vh;
+  min-height: 100vh;
 }
 
 /* ---------- Client Cards ---------- */
