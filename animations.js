@@ -491,82 +491,51 @@ Animations.pinnedVideo = function() {
     scrollTrigger: {
       trigger: '#pinned-video',
       pin: true,
-      scrub: 1,
+      scrub: 0.8,
       start: 'top top',
-      end: '+=4000',
+      end: '+=3500',
       anticipatePin: 1,
     }
   });
 
-  // Set all cards hidden except first
+  // Initial state: all cards hidden below, first card visible
   cards.forEach((card, i) => {
     if (i > 0) {
       gsap.set(card, { 
         opacity: 0, 
-        x: -120, 
-        y: -80,
-        scale: 0.92,
-        rotation: -3,
+        y: 80,
+        scale: 0.96,
         zIndex: cards.length - i
       });
     } else {
-      gsap.set(card, { opacity: 1, zIndex: cards.length });
+      gsap.set(card, { opacity: 1, y: 0, scale: 1, zIndex: cards.length });
     }
-
-    // Animate image + info inside card
-    const img = card.querySelector('.client-card-image');
-    const info = card.querySelector('.client-card-info');
-    if (img && i > 0) gsap.set(img, { opacity: 0, y: 30 });
-    if (info && i > 0) gsap.set(info, { opacity: 0, x: 30 });
   });
 
-  // Cycle through cards with overlapping stack effect
+  // Transition: current card fades up & out, next card slides up & in
   cards.forEach((card, i) => {
-    if (i === 0) return; // First card already visible
+    if (i === 0) return;
 
-    const enterTime = (i - 1) * 1.5;
+    const enterTime = (i - 1) * 1.8;
     const prevCard = cards[i - 1];
-    const img = card.querySelector('.client-card-image');
-    const info = card.querySelector('.client-card-info');
 
-    // Push previous card down and fade it slightly
+    // Previous card moves up and fades
     tl.to(prevCard, {
-      y: 60,
-      opacity: 0.3,
-      scale: 0.95,
-      filter: 'blur(3px)',
-      duration: 0.8,
+      y: -60,
+      opacity: 0,
+      scale: 0.94,
+      duration: 1.0,
       ease: 'power2.inOut',
     }, enterTime);
 
-    // New card enters from top-left with a slight rotation
+    // New card slides up into view
     tl.to(card, {
       opacity: 1,
-      x: 0,
       y: 0,
       scale: 1,
-      rotation: 0,
-      duration: 1,
+      duration: 1.2,
       ease: 'power3.out',
-    }, enterTime + 0.2);
-
-    // Image slides in
-    if (img) {
-      tl.to(img, {
-        opacity: 1, y: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      }, enterTime + 0.5);
-    }
-
-    // Info text slides in
-    if (info) {
-      tl.to(info, {
-        opacity: 1, x: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-      }, enterTime + 0.7);
-    }
+    }, enterTime + 0.3);
   });
 };
 
