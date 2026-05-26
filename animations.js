@@ -503,39 +503,39 @@ Animations.pinnedVideo = function() {
     if (i > 0) {
       gsap.set(card, { 
         opacity: 0, 
-        y: 80,
-        scale: 0.96,
-        zIndex: cards.length - i
+        y: 150,
+        scale: 0.9,
+        zIndex: i // Newer cards get HIGHER z-index so they stack ON TOP
       });
     } else {
-      gsap.set(card, { opacity: 1, y: 0, scale: 1, zIndex: cards.length });
+      gsap.set(card, { opacity: 1, y: 0, scale: 1, zIndex: 0 });
     }
   });
 
-  // Transition: current card fades up & out, next card slides up & in
+  // Transition: current card fades up & back, next card slides up ON TOP
   cards.forEach((card, i) => {
     if (i === 0) return;
 
-    const enterTime = (i - 1) * 1.8;
+    const enterTime = (i - 1) * 1.5;
     const prevCard = cards[i - 1];
 
-    // Previous card moves up and fades
+    // Previous card gets pushed back and fades out (underneath new card)
     tl.to(prevCard, {
-      y: -60,
+      y: -40,
       opacity: 0,
-      scale: 0.94,
+      scale: 0.9,
       duration: 1.0,
       ease: 'power2.inOut',
     }, enterTime);
 
-    // New card slides up into view
+    // New card slides up into view on top
     tl.to(card, {
       opacity: 1,
       y: 0,
       scale: 1,
       duration: 1.2,
       ease: 'power3.out',
-    }, enterTime + 0.3);
+    }, enterTime + 0.2);
   });
 };
 

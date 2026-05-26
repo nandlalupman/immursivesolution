@@ -930,10 +930,6 @@ button {
   z-index: 1;
 }
 
-.client-card[data-panel="1"] {
-  opacity: 1;
-  z-index: 4;
-}
 
 .client-card-image {
   flex: 0 0 48%;
