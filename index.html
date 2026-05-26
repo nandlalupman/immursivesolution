@@ -500,6 +500,10 @@
     <section id="pinned-video">
       <div class="video-wrapper">
         <div class="video-abstract">
+          <img src="assets/panel1.png" class="panel-bg" data-panel="1" style="opacity: 1; z-index: 4;" alt="Royal fashion editorial">
+          <img src="assets/panel2.png" class="panel-bg" data-panel="2" style="opacity: 0; z-index: 3;" alt="Luxury jewelry campaign">
+          <img src="assets/panel3.png" class="panel-bg" data-panel="3" style="opacity: 0; z-index: 2;" alt="Digital presence">
+          <img src="assets/panel4.png" class="panel-bg" data-panel="4" style="opacity: 0; z-index: 1;" alt="Global reach runway">
           <svg class="video-texture-overlay" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <filter id="fabricNoise">
@@ -510,28 +514,30 @@
             <rect width="100%" height="100%" filter="url(#fabricNoise)" opacity="0.03"/>
           </svg>
         </div>
-        <div class="video-controls">
-          <button class="video-play-btn btn-magnetic">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
-              <polygon points="8,5 19,12 8,19"/>
-            </svg>
-          </button>
-        </div>
+        <div class="video-controls" style="display:none;"></div>
+        
         <div class="video-info-panel" data-panel="1">
+          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">VOGUE PARIS</div>
           <div class="panel-title">EDITORIAL VISION</div>
-          <div class="panel-text">We craft visual narratives that captivate audiences and define cultural moments.</div>
+          <div class="panel-text">We craft visual narratives that captivate audiences and define cultural moments. Starring HM King & Queen for Vogue's Autumn Issue.</div>
         </div>
+        
         <div class="video-info-panel" data-panel="2">
+          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">MAISON FONTAINE</div>
           <div class="panel-title">CAMPAIGN STRATEGY</div>
-          <div class="panel-text">Every campaign is meticulously orchestrated to maximize impact across all touchpoints.</div>
+          <div class="panel-text">Every campaign is meticulously orchestrated to maximize impact. An exclusive look at the $2M Emerald Collection launch.</div>
         </div>
+        
         <div class="video-info-panel" data-panel="3">
+          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">ATELIER DIGITAL</div>
           <div class="panel-title">DIGITAL PRESENCE</div>
-          <div class="panel-text">We build digital ecosystems that amplify brand presence and drive meaningful engagement.</div>
+          <div class="panel-text">We build digital ecosystems that amplify brand presence. Creating immersive 3D architecture for future fashion showrooms.</div>
         </div>
+        
         <div class="video-info-panel" data-panel="4">
+          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">PARIS FASHION WEEK</div>
           <div class="panel-title">GLOBAL REACH</div>
-          <div class="panel-text">Our campaigns resonate across continents, transcending cultural boundaries.</div>
+          <div class="panel-text">Our campaigns resonate across continents. Capturing the breathtaking finale at dusk under the Eiffel Tower.</div>
         </div>
       </div>
     </section>

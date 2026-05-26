@@ -482,6 +482,8 @@ Animations.pinnedVideo = function() {
     }
   });
 
+  const bgs = $$('.panel-bg');
+
   // Cycle through panels
   panels.forEach((panel, i) => {
     const enterTime = i * 1.2;
@@ -489,6 +491,14 @@ Animations.pinnedVideo = function() {
     const exitTime  = stayTime + 0.6;
 
     gsap.set(panel, { right: '-400px', opacity: 0, top: '50%', y: '-50%' });
+
+    // Background crossfade (fade out all, fade in current)
+    if (bgs.length > 0) {
+      tl.to(bgs, { opacity: 0, duration: 0.4 }, enterTime);
+      if (bgs[i]) {
+        tl.to(bgs[i], { opacity: 1, duration: 0.4 }, enterTime);
+      }
+    }
 
     // Enter from right
     tl.to(panel, {
@@ -566,46 +576,26 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
 
       const img = product.querySelector('img');
 
-      // Zoom in reveal
+      // Cinematic glide and brightness reveal (removed 3D rotation)
+      if (img) {
+        gsap.set(img, { filter: 'brightness(1.8)' });
+        watchTl.to(img, { filter: 'brightness(1)', duration: 1.5, ease: 'power2.out' }, 0);
+      }
+
       watchTl.fromTo(product,
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1, ease: 'luxuryEase' },
+        { y: 80, opacity: 0, scale: 0.95 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' },
         0
       );
 
-      // Dramatic slow zoom
-      if (img) {
-        watchTl.to(img, {
-          scale: 1.15,
-          duration: 1.5,
-          ease: 'none',
-        }, 0.8);
-      }
-
-      // Rotate product showcase
+      // Gentle floating instead of rotation
       watchTl.to(product, {
-        rotationY: 8,
-        duration: 1,
+        y: -20,
+        duration: 2.5,
         ease: 'sine.inOut',
+        yoyo: true,
+        repeat: 1
       }, 1.5);
-
-      watchTl.to(product, {
-        rotationY: 0,
-        duration: 0.8,
-        ease: 'sine.inOut',
-      }, 2.5);
-
-      // Gentle floating
-      watchTl.to(product, {
-        y: -15,
-        duration: 0.5,
-        ease: 'sine.inOut',
-      }, 2.0);
-      watchTl.to(product, {
-        y: 0,
-        duration: 0.5,
-        ease: 'sine.inOut',
-      }, 2.5);
 
       // Info Chips
       const infoReveal = product.querySelector('.world-info-reveal');
@@ -813,44 +803,28 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
 
       const img = product.querySelector('img');
 
-      // Enter from below
+      // Cinematic blur reveal and smooth float (removed 3D rotation and zoom)
+      if (img) {
+        gsap.set(img, { filter: 'blur(15px) brightness(1.4)' });
+        sneakerTl.to(img, { filter: 'blur(0px) brightness(1)', duration: 1.5, ease: 'power2.out' }, 0);
+      }
+
+      // Elegant float-in
       sneakerTl.fromTo(product,
-        { y: 120, opacity: 0, scale: 0.8 },
-        { y: 0, opacity: 1, scale: 1, duration: 1, ease: 'luxuryEase' },
+        { y: 120, x: 40, opacity: 0, scale: 0.9 },
+        { y: 0, x: 0, opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' },
         0
       );
 
-      // Slight rotation reveal
+      // Subtle atmospheric float
       sneakerTl.to(product, {
-        rotationY: -5,
-        duration: 0.5,
+        y: -25,
+        x: -10,
+        duration: 2.5,
         ease: 'sine.inOut',
-      }, 0.8);
-      sneakerTl.to(product, {
-        rotationY: 5,
-        duration: 1,
-        ease: 'sine.inOut',
-      }, 1.3);
-      sneakerTl.to(product, {
-        rotationY: 0,
-        duration: 0.7,
-        ease: 'sine.out',
-      }, 2.3);
-
-      // Slow dramatic zoom
-      if (img) {
-        sneakerTl.to(img, {
-          scale: 1.2,
-          duration: 1.5,
-          ease: 'none',
-        }, 1.0);
-
-        sneakerTl.to(img, {
-          scale: 1,
-          duration: 1,
-          ease: 'power2.inOut',
-        }, 2.5);
-      }
+        yoyo: true,
+        repeat: 1
+      }, 1.5);
 
       // Info Chips
       const infoReveal = product.querySelector('.world-info-reveal');
