@@ -489,56 +489,73 @@
           <line x1="20" y1="18" x2="20" y2="65" stroke="rgba(255,255,255,0.8)" stroke-width="2"/>
           <line x1="20" y1="30" x2="8" y2="52" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
           <line x1="20" y1="30" x2="32" y2="52" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
-          <line x1="20" y1="65" x2="10" y2="110" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"/>
+              <line x1="20" y1="65" x2="10" y2="110" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"/>
           <line x1="20" y1="65" x2="30" y2="110" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"/>
         </svg>
         <div class="runway-overlay-text">THE STAGE IS SET</div>
       </div>
     </section>
 
-    <!-- ===== PINNED VIDEO ===== -->
+    <!-- ===== CLIENT SHOWCASE (PINNED CARDS) ===== -->
     <section id="pinned-video">
+      <div class="showcase-heading">
+        <div class="about-label">OUR CLIENTS</div>
+        <h2 class="showcase-title">Stories We've<br><em>Brought to Life</em></h2>
+      </div>
       <div class="video-wrapper">
-        <div class="video-abstract">
-          <img src="assets/panel1.png" class="panel-bg" data-panel="1" style="opacity: 1; z-index: 4;" alt="Royal fashion editorial">
-          <img src="assets/panel2.png" class="panel-bg" data-panel="2" style="opacity: 0; z-index: 3;" alt="Luxury jewelry campaign">
-          <img src="assets/panel3.png" class="panel-bg" data-panel="3" style="opacity: 0; z-index: 2;" alt="Digital presence">
-          <img src="assets/panel4.png" class="panel-bg" data-panel="4" style="opacity: 0; z-index: 1;" alt="Global reach runway">
-          <svg class="video-texture-overlay" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <filter id="fabricNoise">
-                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/>
-                <feColorMatrix type="saturate" values="0"/>
-              </filter>
-            </defs>
-            <rect width="100%" height="100%" filter="url(#fabricNoise)" opacity="0.03"/>
-          </svg>
-        </div>
-        <div class="video-controls" style="display:none;"></div>
         
-        <div class="video-info-panel" data-panel="1">
-          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">VOGUE PARIS</div>
-          <div class="panel-title">EDITORIAL VISION</div>
-          <div class="panel-text">We craft visual narratives that captivate audiences and define cultural moments. Starring HM King & Queen for Vogue's Autumn Issue.</div>
+        <!-- Card 1: Fashion Editorial -->
+        <div class="client-card" data-panel="1">
+          <div class="client-card-image">
+            <img src="assets/panel1.png" alt="Arjun & Meera Kapoor - Fashion Editorial">
+          </div>
+          <div class="client-card-info">
+            <div class="client-card-label">EDITORIAL VISION</div>
+            <h3 class="client-card-name">Arjun & Meera Kapoor</h3>
+            <div class="client-card-role">Co-Founders, Kapoor Couture — Mumbai, India</div>
+            <p class="client-card-desc">We crafted their debut runway collection campaign — from concept mood boards to the final editorial spread in Vogue India. The result: a sold-out launch and 4 international stockists.</p>
+          </div>
         </div>
-        
-        <div class="video-info-panel" data-panel="2">
-          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">MAISON FONTAINE</div>
-          <div class="panel-title">CAMPAIGN STRATEGY</div>
-          <div class="panel-text">Every campaign is meticulously orchestrated to maximize impact. An exclusive look at the $2M Emerald Collection launch.</div>
+
+        <!-- Card 2: Jewelry Client -->
+        <div class="client-card" data-panel="2">
+          <div class="client-card-image">
+            <img src="assets/panel2.png" alt="Isabella Fontaine - Jewelry">
+          </div>
+          <div class="client-card-info">
+            <div class="client-card-label">CAMPAIGN STRATEGY</div>
+            <h3 class="client-card-name">Isabella Fontaine</h3>
+            <div class="client-card-role">Creative Director, Maison Fontaine — Paris, France</div>
+            <p class="client-card-desc">Her $2M Emerald Collection needed a visual identity as precious as the stones. We designed the packaging, campaign imagery, and retail experience that tripled her brand recognition.</p>
+          </div>
         </div>
-        
-        <div class="video-info-panel" data-panel="3">
-          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">ATELIER DIGITAL</div>
-          <div class="panel-title">DIGITAL PRESENCE</div>
-          <div class="panel-text">We build digital ecosystems that amplify brand presence. Creating immersive 3D architecture for future fashion showrooms.</div>
+
+        <!-- Card 3: Cafe/Lifestyle -->
+        <div class="client-card" data-panel="3">
+          <div class="client-card-image">
+            <img src="assets/panel3.png" alt="Marcus Chen - Digital Presence">
+          </div>
+          <div class="client-card-info">
+            <div class="client-card-label">DIGITAL PRESENCE</div>
+            <h3 class="client-card-name">Marcus Chen</h3>
+            <div class="client-card-role">Founder, Noir Coffee House — Shanghai, China</div>
+            <p class="client-card-desc">We built an immersive digital ecosystem for Noir — from a stunning 3D virtual café tour to an AI-powered menu experience. Online orders grew 280% in the first quarter.</p>
+          </div>
         </div>
-        
-        <div class="video-info-panel" data-panel="4">
-          <div class="about-label" style="margin-bottom:0.5rem; color:var(--white);">PARIS FASHION WEEK</div>
-          <div class="panel-title">GLOBAL REACH</div>
-          <div class="panel-text">Our campaigns resonate across continents. Capturing the breathtaking finale at dusk under the Eiffel Tower.</div>
+
+        <!-- Card 4: Global Runway -->
+        <div class="client-card" data-panel="4">
+          <div class="client-card-image">
+            <img src="assets/panel4.png" alt="Alexander Beaumont - Global Reach">
+          </div>
+          <div class="client-card-info">
+            <div class="client-card-label">GLOBAL REACH</div>
+            <h3 class="client-card-name">Alexander Beaumont</h3>
+            <div class="client-card-role">CEO, Beaumont Watches — Geneva, Switzerland</div>
+            <p class="client-card-desc">From Geneva to Tokyo, we orchestrated Beaumont's international launch — a multi-city runway event culminating at Paris Fashion Week. Media reach: 120M impressions worldwide.</p>
+          </div>
         </div>
+
       </div>
     </section>
 

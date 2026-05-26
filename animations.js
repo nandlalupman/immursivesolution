@@ -463,13 +463,29 @@ Animations.runway = function() {
   });
 };
 
-/* ------- 6. PINNED VIDEO ------- */
+/* ------- 6. CLIENT SHOWCASE (PINNED CARDS) ------- */
 Animations.pinnedVideo = function() {
   const section = $('#pinned-video');
   if (!section) return;
 
-  const panels = $$('.video-info-panel');
-  if (!panels.length) return;
+  const cards = $$('.client-card');
+  if (!cards.length) return;
+
+  // Showcase heading animation
+  const heading = section.querySelector('.showcase-heading');
+  if (heading) {
+    gsap.set(heading, { opacity: 0, y: 30 });
+    gsap.to(heading, {
+      opacity: 1, y: 0,
+      duration: 1.2,
+      ease: 'luxuryEase',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 70%',
+        toggleActions: 'play none none reset',
+      }
+    });
+  }
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -477,44 +493,80 @@ Animations.pinnedVideo = function() {
       pin: true,
       scrub: 1,
       start: 'top top',
-      end: '+=3000',
+      end: '+=4000',
       anticipatePin: 1,
     }
   });
 
-  const bgs = $$('.panel-bg');
-
-  // Cycle through panels
-  panels.forEach((panel, i) => {
-    const enterTime = i * 1.2;
-    const stayTime  = enterTime + 0.3;
-    const exitTime  = stayTime + 0.6;
-
-    gsap.set(panel, { right: '-400px', opacity: 0, top: '50%', y: '-50%' });
-
-    // Background crossfade (fade out all, fade in current)
-    if (bgs.length > 0) {
-      tl.to(bgs, { opacity: 0, duration: 0.4 }, enterTime);
-      if (bgs[i]) {
-        tl.to(bgs[i], { opacity: 1, duration: 0.4 }, enterTime);
-      }
+  // Set all cards hidden except first
+  cards.forEach((card, i) => {
+    if (i > 0) {
+      gsap.set(card, { 
+        opacity: 0, 
+        x: -120, 
+        y: -80,
+        scale: 0.92,
+        rotation: -3,
+        zIndex: cards.length - i
+      });
+    } else {
+      gsap.set(card, { opacity: 1, zIndex: cards.length });
     }
 
-    // Enter from right
-    tl.to(panel, {
-      right: '5%',
-      opacity: 1,
-      duration: 0.4,
-      ease: 'luxuryEase',
+    // Animate image + info inside card
+    const img = card.querySelector('.client-card-image');
+    const info = card.querySelector('.client-card-info');
+    if (img && i > 0) gsap.set(img, { opacity: 0, y: 30 });
+    if (info && i > 0) gsap.set(info, { opacity: 0, x: 30 });
+  });
+
+  // Cycle through cards with overlapping stack effect
+  cards.forEach((card, i) => {
+    if (i === 0) return; // First card already visible
+
+    const enterTime = (i - 1) * 1.5;
+    const prevCard = cards[i - 1];
+    const img = card.querySelector('.client-card-image');
+    const info = card.querySelector('.client-card-info');
+
+    // Push previous card down and fade it slightly
+    tl.to(prevCard, {
+      y: 60,
+      opacity: 0.3,
+      scale: 0.95,
+      filter: 'blur(3px)',
+      duration: 0.8,
+      ease: 'power2.inOut',
     }, enterTime);
 
-    // Exit to left
-    tl.to(panel, {
-      right: '110%',
-      opacity: 0,
-      duration: 0.4,
-      ease: 'power2.in',
-    }, exitTime);
+    // New card enters from top-left with a slight rotation
+    tl.to(card, {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
+      rotation: 0,
+      duration: 1,
+      ease: 'power3.out',
+    }, enterTime + 0.2);
+
+    // Image slides in
+    if (img) {
+      tl.to(img, {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      }, enterTime + 0.5);
+    }
+
+    // Info text slides in
+    if (info) {
+      tl.to(info, {
+        opacity: 1, x: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      }, enterTime + 0.7);
+    }
   });
 };
 
