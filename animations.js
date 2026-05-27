@@ -312,7 +312,7 @@ Animations.horizontalJourney = function() {
       trigger: '#horizontal-journey',
       pin: true,
       scrub: 1,
-      end: () => '+=' + (window.innerWidth * worlds.length),
+      end: () => '+=' + (window.innerWidth * worlds.length * 0.6), // Faster scroll
       anticipatePin: 1,
     }
   });
@@ -343,7 +343,7 @@ Animations.horizontalJourney = function() {
         scrollTrigger: {
           trigger: world,
           containerAnimation: horizontalTl,
-          start: 'left 80%',
+          start: 'left 100%',
           toggleActions: 'play none none reset',
         }
       });
@@ -359,7 +359,7 @@ Animations.horizontalJourney = function() {
         scrollTrigger: {
           trigger: world,
           containerAnimation: horizontalTl,
-          start: 'left 70%',
+          start: 'left 95%',
           toggleActions: 'play none none reset',
         }
       });
@@ -376,7 +376,7 @@ Animations.horizontalJourney = function() {
         scrollTrigger: {
           trigger: world,
           containerAnimation: horizontalTl,
-          start: 'left 60%',
+          start: 'left 90%',
           toggleActions: 'play none none reset',
         }
       });
