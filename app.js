@@ -226,7 +226,17 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ------- 6. INITIALIZATION SEQUENCE ------- */
   // Start the loading experience
   if (window.Animations && Animations.loading) {
-    Animations.loading();
+    if (sessionStorage.getItem('loaderPlayed')) {
+      const loader = document.getElementById('loader');
+      if (loader) loader.style.display = 'none';
+      const mainContent = document.getElementById('main-content');
+      if (mainContent) mainContent.style.opacity = '1';
+      if (window.Animations.hero) Animations.hero();
+      if (window.Animations.initAll) Animations.initAll();
+    } else {
+      sessionStorage.setItem('loaderPlayed', 'true');
+      Animations.loading();
+    }
   }
 
   /* ------- 7. RESIZE HANDLER ------- */

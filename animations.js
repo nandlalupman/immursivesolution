@@ -153,6 +153,22 @@ Animations.hangerSection = function() {
   const title    = $('.hanger-scene-title');
   const statNums = $$('#hanger-section .stat-number');
 
+  if (window.innerWidth <= 768) {
+    // Mobile simplified entrance
+    gsap.set(units, { opacity: 0, x: 50 });
+    gsap.to(units, {
+      opacity: 1, x: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+      }
+    });
+    return;
+  }
+
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '#hanger-section',
@@ -277,29 +293,13 @@ Animations.hangerSection = function() {
   }
 };
 
-/* ------- 4. HORIZONTAL JOURNEY ------- */
+/* ------- 4. STACKED CARDS JOURNEY ------- */
 Animations.horizontalJourney = function() {
-  const wrapper = $('#horizontal-journey');
-  const track   = $('.journey-track');
   const worlds  = $$('.journey-world');
 
-  if (!wrapper || !track || !worlds.length) return;
+  if (!worlds.length) return;
 
-  // Main horizontal scroll
-  const horizontalTween = gsap.to(worlds, {
-    xPercent: -100 * (worlds.length - 1),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#horizontal-journey',
-      pin: true,
-      scrub: 1,
-      end: () => '+=' + track.scrollWidth,
-      invalidateOnRefresh: true,
-      anticipatePin: 1,
-    }
-  });
-
-  // Per-world entrance animations using containerAnimation
+  // Per-world entrance animations (Vertical scrolling triggers)
   worlds.forEach((world) => {
     const title = world.querySelector('.world-title');
     const desc  = world.querySelector('.world-description');
@@ -315,10 +315,8 @@ Animations.horizontalJourney = function() {
         ease: 'luxuryEase',
         scrollTrigger: {
           trigger: world,
-          containerAnimation: horizontalTween,
-          start: 'left 80%',
-          end: 'left 30%',
-          scrub: true,
+          start: 'top 60%',
+          toggleActions: 'play none none reset',
         }
       });
     }
@@ -332,27 +330,24 @@ Animations.horizontalJourney = function() {
         ease: 'luxuryEase',
         scrollTrigger: {
           trigger: world,
-          containerAnimation: horizontalTween,
-          start: 'left 70%',
-          end: 'left 30%',
-          scrub: true,
+          start: 'top 50%',
+          toggleActions: 'play none none reset',
         }
       });
     }
 
     if (vis) {
-      gsap.set(vis, { opacity: 0, x: 60 });
+      gsap.set(vis, { opacity: 0, scale: 0.9, y: 30 });
       gsap.to(vis, {
         opacity: 1,
-        x: 0,
-        duration: 1,
+        scale: 1,
+        y: 0,
+        duration: 1.2,
         ease: 'luxuryEase',
         scrollTrigger: {
           trigger: world,
-          containerAnimation: horizontalTween,
-          start: 'left 60%',
-          end: 'left 20%',
-          scrub: true,
+          start: 'top 55%',
+          toggleActions: 'play none none reset',
         }
       });
     }
@@ -381,15 +376,14 @@ Animations.horizontalJourney = function() {
       gsap.to({ val: 0 }, {
         val: target,
         ease: 'power2.out',
-        duration: 1,
+        duration: 2,
         snap: { val: 1 },
         onUpdate: function() {
           el.textContent = Math.round(this.targets()[0].val);
         },
         scrollTrigger: {
           trigger: w7,
-          containerAnimation: horizontalTween,
-          start: 'left 50%',
+          start: 'top 40%',
           toggleActions: 'play none none reset',
         }
       });
@@ -597,26 +591,26 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
 
       const img = product.querySelector('img');
 
-      // Cinematic glide and brightness reveal (removed 3D rotation)
+      // Cinematic shoot-in reveal
       if (img) {
-        gsap.set(img, { filter: 'brightness(1.8)' });
-        watchTl.to(img, { filter: 'brightness(1)', duration: 1.5, ease: 'power2.out' }, 0);
+        gsap.set(img, { clipPath: 'inset(100% 0 0 0)', scale: 1.1 });
+        watchTl.to(img, { clipPath: 'inset(0% 0 0 0)', scale: 1, duration: 1.2, ease: 'power4.out' }, 0);
       }
 
       watchTl.fromTo(product,
-        { y: 80, opacity: 0, scale: 0.95 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' },
+        { y: 200, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
         0
       );
 
-      // Gentle floating instead of rotation
+      // Gentle floating after shoot
       watchTl.to(product, {
-        y: -20,
+        y: -10,
         duration: 2.5,
         ease: 'sine.inOut',
         yoyo: true,
         repeat: 1
-      }, 1.5);
+      }, 1.2);
 
       // Info Chips
       const infoReveal = product.querySelector('.world-info-reveal');
@@ -824,28 +818,27 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
 
       const img = product.querySelector('img');
 
-      // Cinematic blur reveal and smooth float (removed 3D rotation and zoom)
+      // Cinematic shoot-in reveal
       if (img) {
-        gsap.set(img, { filter: 'blur(15px) brightness(1.4)' });
-        sneakerTl.to(img, { filter: 'blur(0px) brightness(1)', duration: 1.5, ease: 'power2.out' }, 0);
+        gsap.set(img, { clipPath: 'inset(100% 0 0 0)', scale: 1.1 });
+        sneakerTl.to(img, { clipPath: 'inset(0% 0 0 0)', scale: 1, duration: 1.2, ease: 'power4.out' }, 0);
       }
 
-      // Elegant float-in
+      // Elegant shoot-in
       sneakerTl.fromTo(product,
-        { y: 120, x: 40, opacity: 0, scale: 0.9 },
-        { y: 0, x: 0, opacity: 1, scale: 1, duration: 1.5, ease: 'power3.out' },
+        { y: 200, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
         0
       );
 
-      // Subtle atmospheric float
+      // Subtle atmospheric float after shoot
       sneakerTl.to(product, {
-        y: -25,
-        x: -10,
+        y: -10,
         duration: 2.5,
         ease: 'sine.inOut',
         yoyo: true,
         repeat: 1
-      }, 1.5);
+      }, 1.2);
 
       // Info Chips
       const infoReveal = product.querySelector('.world-info-reveal');

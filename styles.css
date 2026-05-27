@@ -589,22 +589,27 @@ button {
 }
 
 .journey-track {
-  display: flex;
-  flex-wrap: nowrap;
+  display: block;
 }
 
 .journey-world {
-  flex: 0 0 100vw;
+  width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
-  position: relative;
+  position: sticky;
+  top: 0;
   padding: clamp(4rem, 8vw, 8rem);
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.08);
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
 }
 
 .journey-world[data-world="1"] { background: var(--white); }
 .journey-world[data-world="2"] { background: var(--warm-cream); }
-.journey-world[data-world="3"] { background: linear-gradient(135deg, var(--white), var(--warm-cream)); }
+.journey-world[data-world="3"] { background: var(--black); color: var(--white); }
+.journey-world[data-world="3"] .world-title::after { background: var(--white); }
+.journey-world[data-world="3"] .world-number { opacity: 0.1; color: var(--white); }
 .journey-world[data-world="4"] { background: var(--grey-100); }
 .journey-world[data-world="5"] { background: linear-gradient(to right, var(--grey-100), var(--warm-sand)); }
 .journey-world[data-world="6"] { background: var(--warm-sand); }
@@ -1559,8 +1564,18 @@ canvas.cafe-steam-canvas {
   }
 
   .hangers-row {
-    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 1rem;
+    padding-bottom: 2rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hanger-unit {
+    flex: 0 0 80vw;
+    scroll-snap-align: center;
   }
 
   .hanger-stats {
