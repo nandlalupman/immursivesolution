@@ -293,13 +293,40 @@ Animations.hangerSection = function() {
   }
 };
 
-/* ------- 4. STACKED CARDS JOURNEY ------- */
+/* ------- 4. STACKED CARDS JOURNEY (HORIZONTAL) ------- */
 Animations.horizontalJourney = function() {
+  const wrapper = $('#horizontal-journey');
   const worlds  = $$('.journey-world');
 
-  if (!worlds.length) return;
+  if (!wrapper || !worlds.length) return;
 
-  // Per-world entrance animations (Vertical scrolling triggers)
+  // Set initial position for all cards except the first one
+  worlds.forEach((world, i) => {
+    if (i > 0) gsap.set(world, { xPercent: 100, zIndex: i });
+    else gsap.set(world, { xPercent: 0, zIndex: 0 });
+  });
+
+  // Main horizontal stacking scroll
+  const horizontalTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#horizontal-journey',
+      pin: true,
+      scrub: 1,
+      end: () => '+=' + (window.innerWidth * worlds.length),
+      anticipatePin: 1,
+    }
+  });
+
+  // Animate cards sliding in from the right
+  worlds.forEach((world, i) => {
+    if (i === 0) return;
+    horizontalTl.to(world, {
+      xPercent: 0,
+      ease: 'none',
+    });
+  });
+
+  // Per-world entrance animations (using containerAnimation if horizontal, or we can just let them trigger on container scroll)
   worlds.forEach((world) => {
     const title = world.querySelector('.world-title');
     const desc  = world.querySelector('.world-description');
@@ -315,7 +342,8 @@ Animations.horizontalJourney = function() {
         ease: 'luxuryEase',
         scrollTrigger: {
           trigger: world,
-          start: 'top 60%',
+          containerAnimation: horizontalTl,
+          start: 'left 80%',
           toggleActions: 'play none none reset',
         }
       });
@@ -330,7 +358,8 @@ Animations.horizontalJourney = function() {
         ease: 'luxuryEase',
         scrollTrigger: {
           trigger: world,
-          start: 'top 50%',
+          containerAnimation: horizontalTl,
+          start: 'left 70%',
           toggleActions: 'play none none reset',
         }
       });
@@ -346,7 +375,8 @@ Animations.horizontalJourney = function() {
         ease: 'luxuryEase',
         scrollTrigger: {
           trigger: world,
-          start: 'top 55%',
+          containerAnimation: horizontalTl,
+          start: 'left 60%',
           toggleActions: 'play none none reset',
         }
       });
@@ -383,7 +413,8 @@ Animations.horizontalJourney = function() {
         },
         scrollTrigger: {
           trigger: w7,
-          start: 'top 40%',
+          containerAnimation: horizontalTl,
+          start: 'left 50%',
           toggleActions: 'play none none reset',
         }
       });

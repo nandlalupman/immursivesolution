@@ -590,6 +590,9 @@ button {
 
 .journey-track {
   display: block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
 .journey-world {
@@ -597,12 +600,18 @@ button {
   height: 100vh;
   display: flex;
   align-items: center;
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
   padding: clamp(4rem, 8vw, 8rem);
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.08);
+  box-shadow: -15px 0 40px rgba(0,0,0,0.1);
   border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+
+.journey-world[data-world="1"] {
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .journey-world[data-world="1"] { background: var(--white); }
