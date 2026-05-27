@@ -1513,6 +1513,47 @@ canvas.cafe-steam-canvas {
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  #navbar {
+    flex-direction: column;
+    padding: 1rem 4%;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .loader-inner svg {
+    width: 100%;
+    max-width: 90vw;
+    height: auto;
+  }
+
+  .client-card {
+    flex-direction: column;
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .client-card-image {
+    flex: 0 0 250px;
+  }
+
+  .client-card-info {
+    padding: 1.5rem 2rem;
+  }
+
+  .hero-shapes {
+    display: none;
+  }
+
   .hero-word {
     font-size: 3rem;
   }
