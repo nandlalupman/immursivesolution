@@ -220,7 +220,7 @@ Animations.hangerSection = function() {
       pin: true,
       scrub: 1,
       start: 'top top',
-      end: '+=2500',
+      end: '+=2000',
       anticipatePin: 1,
     }
   });
@@ -559,6 +559,25 @@ Animations.pinnedVideo = function() {
     });
   }
 
+  // MOBILE: Simple stacked cards with fade-in, no pinning
+  if (window.innerWidth <= 768) {
+    cards.forEach((card, i) => {
+      gsap.set(card, { opacity: 0, y: 40 });
+      gsap.to(card, {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reset',
+        }
+      });
+    });
+    return;
+  }
+
+  // DESKTOP: Pinned stacking cards
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '#pinned-video',
@@ -577,7 +596,7 @@ Animations.pinnedVideo = function() {
         opacity: 0, 
         y: 150,
         scale: 0.9,
-        zIndex: i // Newer cards get HIGHER z-index so they stack ON TOP
+        zIndex: i
       });
     } else {
       gsap.set(card, { opacity: 1, y: 0, scale: 1, zIndex: 0 });
@@ -591,7 +610,6 @@ Animations.pinnedVideo = function() {
     const enterTime = (i - 1) * 1.5;
     const prevCard = cards[i - 1];
 
-    // Previous card gets pushed back and fades out (underneath new card)
     tl.to(prevCard, {
       y: -40,
       opacity: 0,
@@ -600,7 +618,6 @@ Animations.pinnedVideo = function() {
       ease: 'power2.inOut',
     }, enterTime);
 
-    // New card slides up into view on top
     tl.to(card, {
       opacity: 1,
       y: 0,

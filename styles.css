@@ -892,7 +892,7 @@ button {
 #pinned-video {
   position: relative;
   background: var(--warm-cream);
-  padding: 6rem 0 0;
+  padding: 4rem 0 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -900,7 +900,7 @@ button {
 
 .showcase-heading {
   text-align: center;
-  padding: 0 2rem 2rem;
+  padding: 0 2rem 1.5rem;
   flex-shrink: 0;
 }
 
@@ -1681,19 +1681,56 @@ canvas.cafe-steam-canvas {
   }
 
   /* ---- CLIENT CARDS ---- */
-  .client-card {
+  #pinned-video {
+    height: auto;
+    min-height: auto;
+    padding: 4rem 1rem 2rem;
+  }
+
+  .showcase-heading {
+    padding: 0 1rem 1.5rem;
+  }
+
+  .showcase-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+
+  .video-wrapper {
+    position: relative;
+    display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .client-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
     height: auto;
     max-height: none;
-    overflow-y: visible;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
   }
 
   .client-card-image {
-    flex: 0 0 200px;
+    flex: 0 0 220px;
   }
 
   .client-card-info {
     padding: 1.5rem;
+  }
+
+  .client-card-name {
+    font-size: 1.3rem;
+  }
+
+  .client-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
   }
 
   /* ---- SHOWROOM / HANGERS ---- */
