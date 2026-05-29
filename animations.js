@@ -46,22 +46,22 @@ Animations.loading = function() {
   // Assemble logo
   tl.to(letters, {
     x: 0, y: 0, opacity: 1, scale: 1, rotation: 0,
-    duration: 1.8,
-    stagger: 0.07,
+    duration: 2.2, // Was 1.8
+    stagger: 0.1, // Was 0.07
     ease: 'springSettle',
   })
   // Count percentage
-  .to(pctEl, { opacity: 1, duration: 0.3 }, '-=0.8')
+  .to(pctEl, { opacity: 1, duration: 0.5 }, '-=0.8')
   .to({ val: 0 }, {
     val: 100,
-    duration: 1.6,
+    duration: 2.2, // Was 1.6
     ease: 'power2.inOut',
     onUpdate: function() {
       if (pctEl) pctEl.textContent = Math.round(this.targets()[0].val);
     }
   }, '-=0.5')
   // Fill progress bar
-  .to(fillEl, { width: '100%', duration: 1.6, ease: 'power2.inOut' }, '<')
+  .to(fillEl, { width: '100%', duration: 2.2, ease: 'power2.inOut' }, '<')
   // Tagline
   .to(tagEl, { opacity: 1, y: 0, duration: 0.8, ease: 'luxuryEase' }, '-=0.4')
   // Pause
@@ -353,7 +353,7 @@ Animations.horizontalJourney = function() {
   });
 
   // Main horizontal stacking scroll
-  const scrollMultiplier = window.innerWidth <= 768 ? 0.5 : 0.35;
+  const scrollMultiplier = window.innerWidth <= 768 ? 0.7 : 0.55; // Was 0.5 : 0.35
   const horizontalTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#horizontal-journey',
@@ -584,7 +584,7 @@ Animations.pinnedVideo = function() {
       pin: true,
       scrub: 0.8,
       start: 'top top',
-      end: '+=2000',
+      end: '+=2800', // Was 2000
       anticipatePin: 1,
     }
   });
