@@ -151,21 +151,66 @@ Animations.hangerSection = function() {
   const garments = $$('.hanger-garment');
   const stats    = $('.hanger-stats');
   const title    = $('.hanger-scene-title');
+  const desc     = $('.hanger-description');
   const statNums = $$('#hanger-section .stat-number');
 
   if (window.innerWidth <= 768) {
-    // Mobile simplified entrance
-    gsap.set(units, { opacity: 0, x: 50 });
+    // Mobile simplified entrance — show everything with clean fades
+    gsap.set(units, { opacity: 0, x: 30 });
     gsap.to(units, {
       opacity: 1, x: 0,
-      duration: 0.8,
-      stagger: 0.1,
+      duration: 0.6,
+      stagger: 0.08,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: section,
         start: 'top 80%',
       }
     });
+
+    if (title) {
+      gsap.set(title, { opacity: 0 });
+      gsap.to(title, {
+        opacity: 0.4,
+        duration: 0.6,
+        scrollTrigger: { trigger: section, start: 'top 85%' }
+      });
+    }
+
+    if (desc) {
+      gsap.set(desc, { opacity: 0, y: 15 });
+      gsap.to(desc, {
+        opacity: 1, y: 0,
+        duration: 0.6,
+        scrollTrigger: { trigger: desc, start: 'top 90%' }
+      });
+    }
+
+    if (stats) {
+      gsap.set(stats, { opacity: 1 });
+      const statItems = stats.querySelectorAll('.stat-item');
+      statItems.forEach((item, i) => {
+        gsap.set(item, { opacity: 0, y: 15 });
+        gsap.to(item, {
+          opacity: 1, y: 0,
+          duration: 0.5,
+          delay: 0.1 * i,
+          scrollTrigger: { trigger: stats, start: 'top 90%' }
+        });
+        const numEl = item.querySelector('.stat-number');
+        if (numEl) {
+          const target = parseInt(numEl.dataset.target) || 0;
+          gsap.to({ val: 0 }, {
+            val: target,
+            duration: 1.5,
+            ease: 'power2.out',
+            onUpdate: function() { numEl.textContent = Math.round(this.targets()[0].val); },
+            scrollTrigger: { trigger: stats, start: 'top 85%' }
+          });
+        }
+      });
+    }
+
     return;
   }
 
@@ -175,7 +220,7 @@ Animations.hangerSection = function() {
       pin: true,
       scrub: 1,
       start: 'top top',
-      end: '+=5000',
+      end: '+=2500',
       anticipatePin: 1,
     }
   });
@@ -281,7 +326,8 @@ Animations.hangerSection = function() {
   }
 
   // Phase 4: Exit
-  tl.to([...units, stats], {
+  const exitElements = desc ? [...units, stats, desc] : [...units, stats];
+  tl.to(exitElements, {
     opacity: 0, y: -40,
     duration: 0.6,
     stagger: 0.05,
@@ -307,12 +353,13 @@ Animations.horizontalJourney = function() {
   });
 
   // Main horizontal stacking scroll
+  const scrollMultiplier = window.innerWidth <= 768 ? 0.5 : 0.35;
   const horizontalTl = gsap.timeline({
     scrollTrigger: {
       trigger: '#horizontal-journey',
       pin: true,
       scrub: 1,
-      end: () => '+=' + (window.innerWidth * worlds.length * 0.6), // Faster scroll
+      end: () => '+=' + (window.innerWidth * worlds.length * scrollMultiplier),
       anticipatePin: 1,
     }
   });
@@ -518,7 +565,7 @@ Animations.pinnedVideo = function() {
       pin: true,
       scrub: 0.8,
       start: 'top top',
-      end: '+=3500',
+      end: '+=2000',
       anticipatePin: 1,
     }
   });
@@ -613,8 +660,8 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=2000',
-          pin: true,
+          end: '+=1200',
+          pin: window.innerWidth > 768,
           scrub: 1,
           anticipatePin: 1,
         }
@@ -840,8 +887,8 @@ Animations.testimonialWorld = function(sectionId, config = {}) {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=2000',
-          pin: true,
+          end: '+=1200',
+          pin: window.innerWidth > 768,
           scrub: 1,
           anticipatePin: 1,
         }
@@ -995,6 +1042,8 @@ Animations.footer = function() {
       scrollTrigger: { trigger: footer, start: 'top 45%', toggleActions: 'play none none reset' },
     });
   });
+
+
 
   if (logo) {
     gsap.set(logo, { opacity: 0, scale: 0.9 });

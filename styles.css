@@ -1531,89 +1531,60 @@ canvas.cafe-steam-canvas {
     overflow-x: hidden;
   }
 
+  /* ---- NAVBAR: compact row, solid bg ---- */
   #navbar {
-    flex-direction: column;
-    padding: 1rem 4%;
-    gap: 1rem;
+    flex-direction: row;
+    padding: 0.8rem 5%;
+    gap: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(12px);
+    mix-blend-mode: normal;
+  }
+
+  .nav-brand {
+    font-size: 1.1rem;
   }
 
   .nav-links {
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: nowrap;
   }
 
+  .nav-link {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ---- LOADER ---- */
   .loader-inner svg {
     width: 100%;
     max-width: 90vw;
     height: auto;
   }
 
-  .client-card {
-    flex-direction: column;
-    height: auto;
-    max-height: none;
-    overflow-y: visible;
-  }
-
-  .client-card-image {
-    flex: 0 0 250px;
-  }
-
-  .client-card-info {
-    padding: 1.5rem 2rem;
-  }
-
+  /* ---- HERO ---- */
   .hero-shapes {
     display: none;
   }
 
+  .hero-image-wrapper {
+    display: none;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+
   .hero-word {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
   }
 
-  .hangers-row {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 1rem;
-    padding-bottom: 2rem;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .hanger-unit {
-    flex: 0 0 80vw;
-    scroll-snap-align: center;
-  }
-
-  .hanger-stats {
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-
-  .journey-world {
-    padding: 4rem 2rem;
-  }
-
-  .world-visual {
-    display: none;
-  }
-
-  #custom-cursor {
-    display: none;
-  }
-
-  body {
-    cursor: auto;
-  }
-
-  button {
-    cursor: pointer;
-  }
-
-  a {
-    cursor: pointer;
+  .hero-subtext {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-buttons {
@@ -1624,26 +1595,183 @@ canvas.cafe-steam-canvas {
   .btn-primary,
   .btn-secondary {
     padding: 1rem 2.5rem;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
   }
 
-  .footer-headline {
-    font-size: clamp(2rem, 6vw, 4rem);
+  /* ---- ABOUT ---- */
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
-  #footer {
-    padding: 4rem 1.5rem;
+  #about-section {
+    padding: 6rem 5% 4rem;
   }
 
-  .video-info-panel {
-    width: 280px;
-    padding: 2rem;
+  /* ---- WORK PAGE: World Scenes ---- */
+  .world-scene {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 3rem 1.5rem;
+    height: auto;
+    min-height: auto;
   }
 
+  .world-product {
+    width: 100%;
+  }
+
+  .world-product-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .world-info-reveal {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    margin-top: 1rem;
+    opacity: 1;
+    transform: none;
+    gap: 1.5rem;
+  }
+
+  .info-chip-value {
+    font-size: 1.2rem;
+  }
+
+  .info-chip-label {
+    font-size: 0.55rem;
+  }
+
+  .world-testimonial {
+    max-width: 100%;
+    opacity: 1;
+    transform: none;
+  }
+
+  .world-quote {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .world-client-name {
+    font-size: 0.8rem;
+  }
+
+  .world-client-role {
+    font-size: 0.7rem;
+  }
+
+  #watch-world,
+  #jewelry-world,
+  #cafe-world,
+  #designer-world,
+  #perfume-world,
+  #sneaker-world,
+  #handbag-world {
+    height: auto;
+    min-height: auto;
+  }
+
+  /* ---- CLIENT CARDS ---- */
+  .client-card {
+    flex-direction: column;
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .client-card-image {
+    flex: 0 0 200px;
+  }
+
+  .client-card-info {
+    padding: 1.5rem;
+  }
+
+  /* ---- SHOWROOM / HANGERS ---- */
+  .hanger-scene {
+    height: auto;
+    min-height: auto;
+    padding: 5rem 1rem 3rem;
+  }
+
+  .hanger-scene-title {
+    margin-bottom: 2rem;
+  }
+
+  .hangers-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding: 1rem 0.5rem 2rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hanger-unit {
+    flex: 0 0 55vw;
+    scroll-snap-align: center;
+  }
+
+  .hanger-stats {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem !important;
+  }
+
+  .stat-number {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .hanger-description {
+    font-size: 0.9rem !important;
+    margin-top: 2rem !important;
+  }
+
+  /* ---- PROCESS CARDS ---- */
+  .journey-world {
+    padding: 3rem 1.5rem;
+  }
+
+  .world-visual {
+    display: none;
+  }
+
+  .world-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  /* ---- CINEMATIC RUNWAY ---- */
   .runway-overlay-text {
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(1.8rem, 6vw, 3rem);
     letter-spacing: 0.1em;
   }
 
+  /* ---- VIDEO ---- */
+  .video-info-panel {
+    width: 260px;
+    padding: 1.5rem;
+  }
+
+  /* ---- FOOTER ---- */
+  .footer-headline {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+  }
+
+  #footer {
+    padding: 3rem 1.5rem;
+  }
+
+  /* ---- MISC ---- */
   .sneaker-labels {
     display: none;
   }
@@ -1655,38 +1783,19 @@ canvas.cafe-steam-canvas {
   }
 
   .world-product svg {
-    width: clamp(120px, 50vw, 250px);
+    width: clamp(100px, 40vw, 200px);
   }
 
-  .hanger-scene {
-    height: auto;
-    min-height: 100vh;
-    padding: 6rem 1rem;
-  }
-
-  .stat-number {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-  }
-
-  .about-layout {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .hero-content {
-    max-width: 100%;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
-  .hero-image-wrapper {
+  #custom-cursor {
     display: none;
   }
 
-  .world-scene {
-    flex-direction: column;
-    gap: 2rem;
-    padding: 4rem 2rem;
+  body {
+    cursor: auto;
+  }
+
+  button, a {
+    cursor: pointer;
   }
 }
 
@@ -1699,8 +1808,17 @@ canvas.cafe-steam-canvas {
     font-size: 0.85rem;
   }
 
-  .hero-image-wrapper {
-    display: none;
+  .nav-link {
+    font-size: 0.55rem;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-brand {
+    font-size: 0.95rem;
+  }
+
+  .hanger-unit {
+    flex: 0 0 65vw;
   }
 
   .hanger-hook svg {
@@ -1712,11 +1830,11 @@ canvas.cafe-steam-canvas {
   }
 
   .footer-headline {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .world-quote {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 
   .panel-title {
@@ -1724,7 +1842,16 @@ canvas.cafe-steam-canvas {
   }
 
   .world-product-image {
-    width: 250px;
-    height: 300px;
+    max-width: 240px;
+  }
+
+  .info-chip-value {
+    font-size: 1rem;
+  }
+
+  .world-scene {
+    padding: 2.5rem 1rem;
+    gap: 1.5rem;
   }
 }
+
