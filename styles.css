@@ -922,17 +922,17 @@ button {
   width: 100%;
   flex: 1;
   min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem 0 2rem;
 }
 
 /* ---------- Client Cards ---------- */
 .client-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  grid-area: 1 / 1;
   width: 90%;
   max-width: 1100px;
-  height: 90%;
+  height: auto;
   max-height: 480px;
   background: var(--white);
   border-radius: 20px;
